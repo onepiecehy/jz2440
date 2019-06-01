@@ -1,0 +1,2 @@
+#!/bin/sh
+distcc /work/tools/gcc-3.4.5-glibc-2.3.6/bin/arm-linux-g++ "$@"

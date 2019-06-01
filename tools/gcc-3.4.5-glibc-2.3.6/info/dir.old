@@ -1,0 +1,70 @@
+-*- Text -*-
+This is the file .../info/dir, which contains the topmost node of
+the Info hierarchy.  The first time you invoke Info you start off
+looking at that node, which is (dir)Top.
+
+File: dir	Node: Top	This is the top of the INFO tree
+  This (the Directory node) gives a menu of major topics.
+  Typing "q" exits, "?" lists all Info commands, "d" returns here,
+  "mCoreutils<Return>" visits Coreutils topic, etc.
+  Or click mouse button 2 on a menu item or cross reference to select
+  it.
+  --- PLEASE ADD DOCUMENTATION TO THIS TREE. (See INFO topic first.) ---
+
+In Ubuntu, Info `dir' entries are added with the command
+`install-info'.  Please refer to install-info(8) for usage details.
+
+* Menu: The list of major topics begins on the next line.
+
+Basics
+* Coreutils: (coreutils).		Core GNU (file, text, shell)
+					utilities.
+* Common options: (coreutils)Common options.
+					Common options.
+* File permissions: (coreutils)File permissions.
+					Access modes.
+* Date input formats: (coreutils)Date input formats.
+* Finding files: (find).		Operating on files matching certain
+					criteria.
+
+Miscellaneous:
+* Rluserman: (rluserman).		GNU Readline Library API
+
+Utilities
+* Gzip: (gzip). 			The gzip command for compressing
+					files.
+
+Development
+* Flex: (flex). 			A fast scanner generator
+* Ipc: (ipc).				System V interprocess communication
+					facilities
+* M4: (m4).				The GNU m4 macro preprocessor.
+
+Network Applications
+* Wget: (wget). 			The non-interactive network
+					downloader.
+
+Disk Management
+* Fdutils: (fdutils).			Linux floppy utilities
+
+Editors
+* nano: (nano). 			Small and friendly text editor.
+
+Programming
+* Cpp: (cpp).				The GNU C preprocessor.
+* Cpplib: (cppinternals).		Cpplib internals.
+* gcc: (gcc).				The GNU Compiler Collection.
+* gccinstall: (gccinstall).		Installing the GNU Compiler
+					Collection.
+
+General Commands
+* Cpio: (cpio). 			A program to manage archives of files.
+* dc: (dc).				Arbitrary precision RPN "Desktop
+					Calculator".
+* Ed: (ed).				The GNU line editor.
+* Grep: (grep). 			Grep searches on input for lines
+					containing a match to a pattern.
+* Screen: (screen).			Full-screen window manager.
+* sed: (sed).				Stream EDitor.
+* Time: (time). 			A utility to time the execution of a
+					command

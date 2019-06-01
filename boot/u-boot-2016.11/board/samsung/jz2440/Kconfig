@@ -1,0 +1,15 @@
+if TARGET_JZ2440
+
+config SYS_BOARD
+	default "jz2440"
+
+config SYS_VENDOR
+	default "samsung"
+
+config SYS_SOC
+	default "s3c24x0"
+
+config SYS_CONFIG_NAME
+	default "jz2440"
+
+endif
