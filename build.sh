@@ -38,6 +38,14 @@ function config_boot()
 	echo "-------------------config boot ------------------------------------- stop\n"
 }
 
+function menucfg_boot()
+{
+	# config boot
+	echo "-------------------menuconfig boot ------------------------------------- start\n"
+	make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE menuconfig
+	echo "-------------------menuconfig boot ------------------------------------- stop\n"
+}
+
 function show_usage()
 {
 	echo "
@@ -73,6 +81,16 @@ if [ $1 ]; then
 		fi
 		config_boot
 		exit 0
+	elif [ $1 = bootmenucfg ]; then
+		if [ $2 ]; then
+			cd ./boot/$2
+		else
+			cd ./boot/u-boot-2016.11
+		fi
+		menucfg_boot
+		exit 0
+
+
 	fi
 else 
 	show_usage

@@ -13,6 +13,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
+#define CONFIG_JZ2440_LED
 /*
  * High Level Configuration Options
  * (easy to change)
@@ -21,7 +22,7 @@
 #define CONFIG_S3C2440		/* specifically a SAMSUNG S3C2440 SoC */
 #define CONFIG_JZ2440		/* on a JZ2440 Board */
 
-#define CONFIG_SYS_TEXT_BASE	0x0
+#define CONFIG_SYS_TEXT_BASE	0x31000000
 
 #define CONFIG_SYS_ARM_CACHE_WRITETHROUGH
 
@@ -32,12 +33,14 @@
 #define CONFIG_SETUP_MEMORY_TAGS
 #define CONFIG_INITRD_TAG
 
+#define CONFIG_SKIP_LOWLEVEL_INIT
 /*
  * Hardware drivers
  */
-#define CONFIG_CS8900		/* we have a CS8900 on-board */
-#define CONFIG_CS8900_BASE	0x19000300
-#define CONFIG_CS8900_BUS16	/* the Linux driver does accesses as shorts */
+#define CONFIG_DRIVER_DM9000                    /*DM9000*/
+#define CONFIG_DM9000_BASE                   0x20000000
+#define DM9000_IO                            CONFIG_DM9000_BASE          
+#define DM9000_DATA                         (CONFIG_DM9000_BASE + 4)
 
 /*
  * select serial console configuration
@@ -81,6 +84,7 @@
 #define CONFIG_BOOT_RETRY_TIME	-1
 #define CONFIG_RESET_TO_RETRY
 
+#define CONFIG_ETHADDR	08:90:00:A0:90:90
 #define CONFIG_NETMASK		255.255.255.0
 #define CONFIG_IPADDR		10.0.0.110
 #define CONFIG_SERVERIP		10.0.0.1
@@ -101,7 +105,7 @@
 #define CONFIG_SYS_BARGSIZE	CONFIG_SYS_CBSIZE
 
 #define CONFIG_SYS_MEMTEST_START	0x30000000	/* memtest works on */
-#define CONFIG_SYS_MEMTEST_END		0x33F00000	/* 63 MB in DRAM */
+#define CONFIG_SYS_MEMTEST_END		0x31F00000	/* 63 MB in DRAM */
 
 #define CONFIG_SYS_LOAD_ADDR		0x30800000
 
@@ -115,7 +119,7 @@
  */
 #define CONFIG_NR_DRAM_BANKS	1          /* we have 1 bank of DRAM */
 #define PHYS_SDRAM_1		0x30000000 /* SDRAM Bank #1 */
-#define PHYS_SDRAM_1_SIZE	0x04000000 /* 64 MB */
+#define PHYS_SDRAM_1_SIZE	0x03ffffff /* 64 MB */
 
 #define PHYS_FLASH_1		0x00000000 /* Flash Bank #0 */
 

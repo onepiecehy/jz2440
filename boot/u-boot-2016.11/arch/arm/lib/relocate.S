@@ -109,7 +109,7 @@ fixnext:
 	blo	fixloop
 
 relocate_done:
-
+	
 #ifdef __XSCALE__
 	/*
 	 * On xscale, icache must be invalidated and write buffers drained,

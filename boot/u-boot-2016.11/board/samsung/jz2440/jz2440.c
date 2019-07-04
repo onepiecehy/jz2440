@@ -23,8 +23,8 @@ DECLARE_GLOBAL_DATA_PTR;
 #define M_PDIV	0x4
 #define M_SDIV	0x1
 #elif (FCLK_SPEED == 1)		/* Fout = 202.8MHz */
-#define M_MDIV	0xA1
-#define M_PDIV	0x3
+#define M_MDIV	0x5c
+#define M_PDIV	0x1
 #define M_SDIV	0x1
 #endif
 
@@ -35,11 +35,30 @@ DECLARE_GLOBAL_DATA_PTR;
 #define U_M_PDIV	0x3
 #define U_M_SDIV	0x1
 #elif (USB_CLOCK == 1)
-#define U_M_MDIV	0x48
-#define U_M_PDIV	0x3
+#define U_M_MDIV	0x38
+#define U_M_PDIV	0x2
 #define U_M_SDIV	0x2
 #endif
 
+
+#ifdef CONFIG_JZ2440_LED
+void inline coloured_LED_init (void) {
+	struct s3c24x0_gpio * const gpio = s3c24x0_get_base_gpio();
+    writel(readl(&gpio->gpfcon) & ~0x3f00 | 0x1500, &gpio->gpfcon);    
+    writel(readl(&gpio->gpfdat) | 0x7<<4, &gpio->gpfdat);
+}
+
+void inline red_LED_on (void) {
+	struct s3c24x0_gpio * const gpio = s3c24x0_get_base_gpio();
+    writel(readl(&gpio->gpfdat) & ~(1<<5), &gpio->gpfdat);
+}
+
+void inline red_LED_off(void) {
+	struct s3c24x0_gpio * const gpio = s3c24x0_get_base_gpio();
+    writel(readl(&gpio->gpfdat) | 1<<5, &gpio->gpfdat);
+}
+
+#endif
 static inline void pll_delay(unsigned long loops)
 {
 	__asm__ volatile ("1:\n"
@@ -121,6 +140,10 @@ int board_eth_init(bd_t *bis)
 	int rc = 0;
 #ifdef CONFIG_CS8900
 	rc = cs8900_initialize(0, CONFIG_CS8900_BASE);
+#endif
+
+#ifdef CONFIG_DRIVER_DM9000
+	rc = dm9000_initialize(bis);
 #endif
 	return rc;
 }

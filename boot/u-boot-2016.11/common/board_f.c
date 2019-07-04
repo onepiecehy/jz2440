@@ -1083,6 +1083,8 @@ void board_init_f(ulong boot_flags)
 	/* NOTREACHED - jump_to_copy() does not return */
 	hang();
 #endif
+debug("=====> board_init_f out\n");
+
 }
 
 #if defined(CONFIG_X86) || defined(CONFIG_ARC)

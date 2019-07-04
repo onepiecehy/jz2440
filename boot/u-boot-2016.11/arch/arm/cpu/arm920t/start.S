@@ -36,6 +36,8 @@ reset:
 	orr	r0, r0, #0xd3
 	msr	cpsr, r0
 
+	bl coloured_LED_init
+        bl red_LED_on
 #if	defined(CONFIG_AT91RM9200DK) || defined(CONFIG_AT91RM9200EK)
 	/*
 	 * relocate exception table
@@ -62,6 +64,8 @@ copyex:
 #  define INTMSK	0x4A000008	/* Interrupt-Controller base addresses */
 #  define INTSUBMSK	0x4A00001C
 #  define CLKDIVN	0x4C000014	/* clock divisor register */
+#  define LOCKTIME      0x4c000000
+#  define MPLLCON       0x4c000004
 # endif
 
 	ldr	r0, =pWTCON
@@ -80,11 +84,23 @@ copyex:
 	str	r1, [r0]
 # endif
 
-	/* FCLK:HCLK:PCLK = 1:2:4 */
-	/* default FCLK is 120 MHz ! */
-	ldr	r0, =CLKDIVN
-	mov	r1, #3
+# if defined(CONFIG_S3C2440)
+	ldr	r1, =0x7fff
+	ldr	r0, =INTSUBMSK
 	str	r1, [r0]
+# endif
+
+	/* FCLK:HCLK:PCLK = 1:4:8 */
+	/* FCLK is 400 MHz ! */
+	/*设置分频数*/
+	ldr r0, =CLKDIVN/*取得CLKDIVN寄存器地址*/
+	mov r1, #0x05/*CLKDIVN寄存器设置数据*/
+	str r1, [r0]/*将CLKDIVN设置数据写入CLKDIVN寄存器*/
+	/*修改CPU总线模式*/
+	mrc p15, 0, r1, c1, c0, 0
+	orr r1, r1, #0xc0000000
+	mcr p15, 0, r1, c1, c0, 0
+
 #endif	/* CONFIG_S3C24X0 */
 
 	/*

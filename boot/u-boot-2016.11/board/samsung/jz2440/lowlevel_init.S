@@ -75,11 +75,11 @@
 #define B3_Tacp			0x3     /*  6clk */
 #define B3_PMC			0x0	/* normal */
 
-#define B4_Tacs			0x0	/*  0clk */
-#define B4_Tcos			0x0	/*  0clk */
-#define B4_Tacc			0x7	/* 14clk */
-#define B4_Tcoh			0x0	/*  0clk */
-#define B4_Tah			0x0	/*  0clk */
+#define B4_Tacs			0x1	/*  0clk */
+#define B4_Tcos			0x2	/*  0clk */
+#define B4_Tacc			0x4	/* 14clk */
+#define B4_Tcoh			0x2	/*  0clk */
+#define B4_Tah			0x1	/*  0clk */
 #define B4_Tacp			0x0
 #define B4_PMC			0x0	/* normal */
 
@@ -103,9 +103,9 @@
 #define REFEN			0x1	/* Refresh enable */
 #define TREFMD			0x0	/* CBR(CAS before RAS)/Auto refresh */
 #define Trp			0x0	/* 2clk */
-#define Trc			0x3	/* 7clk */
+#define Trc			0x0	/* 4clk */
 #define Tchr			0x2	/* 3clk */
-#define REFCNT			1113	/* period=15.6us, HCLK=60Mhz, (2048+1-15.6*60) */
+#define REFCNT			1269	/* period=7.8us, HCLK=100Mhz, (2048+1-7.8*100) */
 /**************************************/
 
 .globl lowlevel_init

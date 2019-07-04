@@ -974,6 +974,7 @@ init_fnc_t init_sequence_r[] = {
 
 void board_init_r(gd_t *new_gd, ulong dest_addr)
 {
+debug("=====> board_init_r in \n");
 #ifdef CONFIG_NEEDS_MANUAL_RELOC
 	int i;
 #endif
