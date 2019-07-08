@@ -57,6 +57,7 @@
 
 /* MXIC */
 #define MX29LV040	0x004F
+#define MX29LV160DB	0x2249
 
 /* WINBOND */
 #define W39L040A	0x00D6
@@ -361,6 +362,23 @@ static const struct amd_flash_info jedec_table[] = {
 		.NumEraseRegions= 4,
 		.regions	= {
 			ERASEINFO(0x10000, 15),
+			ERASEINFO(0x08000, 1),
+			ERASEINFO(0x02000, 2),
+			ERASEINFO(0x04000, 1),
+		}
+	},
+	{
+		.mfr_id		= (u16)MX_MANUFACT,
+		.dev_id		= MX29LV160DB,
+		.name		= "MXIC MX29LV160DB",
+		.uaddr		= {
+			[1] = MTD_UADDR_0x0555_0x02AA /* x16 */
+		},
+		.DevSize	= SIZE_2MiB,
+		.CmdSet		= CFI_CMDSET_AMD_LEGACY,
+		.NumEraseRegions= 4,
+		.regions	= {
+			ERASEINFO(0x10000, 31),
 			ERASEINFO(0x08000, 1),
 			ERASEINFO(0x02000, 2),
 			ERASEINFO(0x04000, 1),

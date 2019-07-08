@@ -1773,6 +1773,7 @@ static void flash_read_jedec_ids (flash_info_t * info)
 	default:
 		break;
 	}
+
 }
 
 /*-----------------------------------------------------------------------

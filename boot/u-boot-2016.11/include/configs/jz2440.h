@@ -13,6 +13,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
+#define DEBUG
 #define CONFIG_JZ2440_LED
 /*
  * High Level Configuration Options
@@ -119,7 +120,7 @@
  */
 #define CONFIG_NR_DRAM_BANKS	1          /* we have 1 bank of DRAM */
 #define PHYS_SDRAM_1		0x30000000 /* SDRAM Bank #1 */
-#define PHYS_SDRAM_1_SIZE	0x03ffffff /* 64 MB */
+#define PHYS_SDRAM_1_SIZE	0x03000000 /* 64 MB */
 
 #define PHYS_FLASH_1		0x00000000 /* Flash Bank #0 */
 
@@ -137,7 +138,7 @@
 
 #define CONFIG_SYS_MAX_FLASH_BANKS	1
 #define CONFIG_SYS_FLASH_BANKS_LIST     { CONFIG_SYS_FLASH_BASE }
-#define CONFIG_SYS_MAX_FLASH_SECT	(19)
+#define CONFIG_SYS_MAX_FLASH_SECT	(35)
 
 #define CONFIG_ENV_ADDR			(CONFIG_SYS_FLASH_BASE + 0x070000)
 #define CONFIG_ENV_IS_IN_FLASH
