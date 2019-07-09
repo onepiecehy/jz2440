@@ -13,7 +13,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#define DEBUG
+/*#define DEBUG*/
 #define CONFIG_JZ2440_LED
 /*
  * High Level Configuration Options
@@ -160,7 +160,7 @@
  */
 #ifdef CONFIG_CMD_NAND
 #define CONFIG_NAND_S3C2440
-#define CONFIG_SYS_S3C2440_NAND_HWECC
+/*#define CONFIG_SYS_S3C2440_NAND_HWECC*/
 #define CONFIG_SYS_MAX_NAND_DEVICE	1
 #define CONFIG_SYS_NAND_BASE		0x4E000000
 #endif

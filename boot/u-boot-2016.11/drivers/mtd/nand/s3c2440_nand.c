@@ -11,17 +11,16 @@
 #include <asm/arch/s3c24x0_cpu.h>
 #include <asm/io.h>
 
-#define S3C2440_NFCONF_EN          (1<<15)
-#define S3C2440_NFCONF_512BYTE     (1<<14)
-#define S3C2440_NFCONF_4STEP       (1<<13)
-#define S3C2440_NFCONF_INITECC     (1<<12)
-#define S3C2440_NFCONF_nFCE        (1<<11)
-#define S3C2440_NFCONF_TACLS(x)    ((x)<<8)
-#define S3C2440_NFCONF_TWRPH0(x)   ((x)<<4)
-#define S3C2440_NFCONF_TWRPH1(x)   ((x)<<0)
+#define S3C2440_NFCONT_EN          (1<<0)
+#define S3C2440_NFCONT_nFCE        (1<<1)
+#define S3C2440_NFCONT_INITECC     (1<<4)
 
-#define S3C2440_ADDR_NALE 4
-#define S3C2440_ADDR_NCLE 8
+#define S3C2440_NFCONF_TACLS(x)    ((x)<<12)
+#define S3C2440_NFCONF_TWRPH0(x)   ((x)<<8)
+#define S3C2440_NFCONF_TWRPH1(x)   ((x)<<4)
+
+#define S3C2440_ADDR_NALE 0x8
+#define S3C2440_ADDR_NCLE 0xc
 
 #ifdef CONFIG_NAND_SPL
 
@@ -56,11 +55,11 @@ static void s3c24x0_hwcontrol(struct mtd_info *mtd, int cmd, unsigned int ctrl)
 		chip->IO_ADDR_W = (void *)IO_ADDR_W;
 
 		if (ctrl & NAND_NCE)
-			writel(readl(&nand->nfconf) & ~S3C2440_NFCONF_nFCE,
-			       &nand->nfconf);
+			writel(readl(&nand->nfcont) & ~S3C2440_NFCONT_nFCE,
+			       &nand->nfcont);
 		else
-			writel(readl(&nand->nfconf) | S3C2440_NFCONF_nFCE,
-			       &nand->nfconf);
+			writel(readl(&nand->nfcont) | S3C2440_NFCONT_nFCE,
+			       &nand->nfcont);
 	}
 
 	if (cmd != NAND_CMD_NONE)
@@ -125,17 +124,19 @@ int board_nand_init(struct nand_chip *nand)
 	twrph0 = CONFIG_S3C24XX_TWRPH0;
 	twrph1 =  CONFIG_S3C24XX_TWRPH1;
 #else
-	tacls = 4;
-	twrph0 = 8;
-	twrph1 = 8;
+	tacls = 1;
+	twrph0 = 2;
+	twrph1 = 1;
 #endif
 
-	cfg = S3C2440_NFCONF_EN;
-	cfg |= S3C2440_NFCONF_TACLS(tacls - 1);
-	cfg |= S3C2440_NFCONF_TWRPH0(twrph0 - 1);
-	cfg |= S3C2440_NFCONF_TWRPH1(twrph1 - 1);
+	cfg = 0;
+	cfg |= S3C2440_NFCONF_TACLS(tacls);
+	cfg |= S3C2440_NFCONF_TWRPH0(twrph0);
+	cfg |= S3C2440_NFCONF_TWRPH1(twrph1);
 	writel(cfg, &nand_reg->nfconf);
 
+	cfg = S3C2440_NFCONT_INITECC | S3C2440_NFCONT_EN;
+	writel(cfg, &nand_reg->nfcont);
 	/* initialize nand_chip data structure */
 	nand->IO_ADDR_R = (void *)&nand_reg->nfdata;
 	nand->IO_ADDR_W = (void *)&nand_reg->nfdata;
