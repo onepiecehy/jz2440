@@ -19,6 +19,14 @@ function build_kernel()
 	echo "-------------------build kernel ------------------------------------- stop\n"
 }
 
+function config_kernel()
+{
+	# config kernel
+	echo "-------------------config kernel ------------------------------------- start\n"
+	make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE s3c2410_defconfig
+	echo "-------------------config kernel ------------------------------------- stop\n"
+}
+
 function build_boot()
 {
 	# clean boot
@@ -62,35 +70,25 @@ function show_usage()
 cd ${home}
 if [ $1 ]; then
 	if [ $1 = kernel ]; then
-		cd ./kernel/$2
+		cd ./kernel/linux-4.20.9
 		build_kernel
 		exit 0
+	elif [ $1 = kernelconfig ]; then
+		cd ./kernel/linux-4.20.9
+		config_kernel
+		exit 0
 	elif [ $1 = boot ]; then
-		if [ $2 ]; then
-			cd ./boot/$2
-		else
-			cd ./boot/u-boot-2016.11
-		fi
+		cd ./boot/u-boot-2016.11
 		build_boot
 		exit 0
 	elif [ $1 = bootconfig ]; then
-		if [ $2 ]; then
-			cd ./boot/$2
-		else
-			cd ./boot/u-boot-2016.11
-		fi
+		cd ./boot/u-boot-2016.11
 		config_boot
 		exit 0
 	elif [ $1 = bootmenucfg ]; then
-		if [ $2 ]; then
-			cd ./boot/$2
-		else
-			cd ./boot/u-boot-2016.11
-		fi
+		cd ./boot/u-boot-2016.11
 		menucfg_boot
 		exit 0
-
-
 	fi
 else 
 	show_usage
