@@ -514,6 +514,14 @@ config MACH_RX3715
 	help
 	  Say Y here if you are using the HP iPAQ rx3715.
 
+config MACH_JZ2440
+	bool "JZ2440"
+	select S3C24XX_SMDK
+	select S3C_DEV_NAND
+	select S3C_DEV_USB_HOST
+	help
+	  Say Y here if you are using the JZ2440.
+
 config ARCH_S3C2440
 	bool "SMDK2440"
 	select S3C2440_XTAL_16934400

@@ -572,7 +572,6 @@ asmlinkage __visible void __init start_kernel(void)
 
 	build_all_zonelists(NULL);
 	page_alloc_init();
-
 	pr_notice("Kernel command line: %s\n", boot_command_line);
 	parse_early_param();
 	after_dashes = parse_args("Booting kernel",
@@ -594,12 +593,9 @@ asmlinkage __visible void __init start_kernel(void)
 	sort_main_extable();
 	trap_init();
 	mm_init();
-
 	ftrace_init();
-
 	/* trace_printk can be enabled here */
 	early_trace_init();
-
 	/*
 	 * Set up the scheduler prior starting any interrupts (such as the
 	 * timer interrupt). Full topology setup happens at smp_init()
@@ -615,28 +611,22 @@ asmlinkage __visible void __init start_kernel(void)
 		 "Interrupts were enabled *very* early, fixing it\n"))
 		local_irq_disable();
 	radix_tree_init();
-
 	/*
 	 * Set up housekeeping before setting up workqueues to allow the unbound
 	 * workqueue to take non-housekeeping into account.
 	 */
 	housekeeping_init();
-
 	/*
 	 * Allow workqueue creation and work item queueing/cancelling
 	 * early.  Work item execution depends on kthreads and starts after
 	 * workqueue_init().
 	 */
 	workqueue_init_early();
-
 	rcu_init();
-
 	/* Trace events are available after this */
 	trace_init();
-
 	if (initcall_debug)
 		initcall_debug_enable();
-
 	context_tracking_init();
 	/* init some links before init_ISA_irqs() */
 	early_irq_init();
@@ -656,28 +646,25 @@ asmlinkage __visible void __init start_kernel(void)
 
 	early_boot_irqs_disabled = false;
 	local_irq_enable();
-
 	kmem_cache_init_late();
-
 	/*
 	 * HACK ALERT! This is early. We're enabling the console before
 	 * we've done PCI setups etc, and console_init() must be aware of
 	 * this. But we do want output early, in case something goes wrong.
 	 */
+
 	console_init();
 	if (panic_later)
 		panic("Too many boot %s vars at `%s'", panic_later,
 		      panic_param);
-
+	
 	lockdep_init();
-
 	/*
 	 * Need to run this when irqs are enabled, because it wants
 	 * to self-test [hard/soft]-irqs on/off lock inversion bugs
 	 * too:
 	 */
 	locking_selftest();
-
 	/*
 	 * This needs to be called before any devices perform DMA
 	 * operations that might use the SWIOTLB bounce buffers. It will
@@ -685,7 +672,6 @@ asmlinkage __visible void __init start_kernel(void)
 	 * not cause "plain-text" data to be decrypted when accessed.
 	 */
 	mem_encrypt_init();
-
 #ifdef CONFIG_BLK_DEV_INITRD
 	if (initrd_start && !initrd_below_start_ok &&
 	    page_to_pfn(virt_to_page((void *)initrd_start)) < min_low_pfn) {
@@ -730,13 +716,10 @@ asmlinkage __visible void __init start_kernel(void)
 	cgroup_init();
 	taskstats_init_early();
 	delayacct_init();
-
 	check_bugs();
-
 	acpi_subsystem_init();
 	arch_post_acpi_subsys_init();
 	sfi_init_late();
-
 	if (efi_enabled(EFI_RUNTIME_SERVICES)) {
 		efi_free_boot_services();
 	}

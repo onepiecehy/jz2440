@@ -58,6 +58,9 @@ const uchar default_environment[] = {
 #ifdef	CONFIG_SERVERIP
 	"serverip="	__stringify(CONFIG_SERVERIP)	"\0"
 #endif
+#ifdef	CONFIG_ETHADDR
+	"ethaddr="	__stringify(CONFIG_ETHADDR)	"\0"
+#endif
 #ifdef	CONFIG_SYS_AUTOLOAD
 	"autoload="	CONFIG_SYS_AUTOLOAD		"\0"
 #endif

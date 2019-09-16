@@ -56,7 +56,7 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_H7202                162
 #define MACH_TYPE_IQ80321              169
 #define MACH_TYPE_KS8695               180
-#define MACH_TYPE_SMDK2410             193
+#define MACH_TYPE_SMDK2410             1995
 #define MACH_TYPE_CEIVA                200
 #define MACH_TYPE_VOICEBLUE            218
 #define MACH_TYPE_H5400                220
@@ -345,6 +345,7 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_SNAPPER_9260         1987
 #define MACH_TYPE_DSM320               1988
 #define MACH_TYPE_EXEDA                1994
+#define MACH_TYPE_JZ2440               1995
 #define MACH_TYPE_MINI2440             1999
 #define MACH_TYPE_COLIBRI300           2000
 #define MACH_TYPE_LINKSTATION_LS_HGL   2005
@@ -5066,6 +5067,18 @@ extern unsigned int __machine_arch_type;
 # define machine_is_exeda()	(machine_arch_type == MACH_TYPE_EXEDA)
 #else
 # define machine_is_exeda()	(0)
+#endif
+
+#ifdef CONFIG_MACH_JZ2440
+# ifdef machine_arch_type
+#  undef machine_arch_type
+#  define machine_arch_type	__machine_arch_type
+# else
+#  define machine_arch_type	MACH_TYPE_JZ2440
+# endif
+# define machine_is_jz2440()	(machine_arch_type == MACH_TYPE_JZ2440)
+#else
+# define machine_is_jz2440()	(0)
 #endif
 
 #ifdef CONFIG_MACH_MINI2440
