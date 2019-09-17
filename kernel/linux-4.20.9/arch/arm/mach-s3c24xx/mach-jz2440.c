@@ -13,6 +13,7 @@
 #include <linux/serial_s3c.h>
 #include <linux/platform_device.h>
 #include <linux/io.h>
+#include <linux/dm9000.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
@@ -137,12 +138,46 @@ static struct s3c2410fb_mach_info jz2440_fb_info __initdata = {
 	.lpcsel		= ((0xCE6) & ~7) | 1<<4,
 };
 
+#define MACH_JZ2440_DM9K_BASE (S3C2410_CS4)
+static struct resource Jz2440_dm9k_resource[] = {
+	[0] = {
+		.start = MACH_JZ2440_DM9K_BASE,
+		.end   = MACH_JZ2440_DM9K_BASE + 3,
+		.flags = IORESOURCE_MEM,
+	},
+	[1] = {
+		.start = MACH_JZ2440_DM9K_BASE + 4,
+		.end   = MACH_JZ2440_DM9K_BASE + 7,
+		.flags = IORESOURCE_MEM,
+	},
+	[2] = {
+		.start = IRQ_EINT7,
+		.end   = IRQ_EINT7,
+		.flags = IORESOURCE_IRQ | IORESOURCE_IRQ_HIGHEDGE,
+	}
+};
+
+static struct dm9000_plat_data Jz2440_dm9k_pdata = {
+	.flags = (DM9000_PLATF_16BITONLY | DM9000_PLATF_NO_EEPROM),
+};
+
+static struct platform_device Jz2440_device_eth = {
+	.name = "dm9000",
+	.id   = -1,
+	.num_resources = ARRAY_SIZE(Jz2440_dm9k_resource),
+	.resource = Jz2440_dm9k_resource,
+	.dev = {
+		.platform_data = &Jz2440_dm9k_pdata,
+	},
+};
+
 static struct platform_device *jz2440_devices[] __initdata = {
 	&s3c_device_ohci,
 	&s3c_device_lcd,
 	&s3c_device_wdt,
 	&s3c_device_i2c0,
 	&s3c_device_iis,
+	&Jz2440_device_eth,
 };
 
 static void __init jz2440_map_io(void)

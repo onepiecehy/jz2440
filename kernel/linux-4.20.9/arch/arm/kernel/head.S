@@ -105,6 +105,7 @@ ENTRY(stext)
 	blo	__error_lpae			@ only classic page table format
 #endif
 
+
 #ifndef CONFIG_XIP_KERNEL
 	adr	r3, 2f
 	ldmia	r3, {r4, r8}

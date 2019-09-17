@@ -1106,7 +1106,6 @@ void __init setup_arch(char **cmdline_p)
 
 	early_fixmap_init();
 	early_ioremap_init();
-
 	parse_early_param();
 
 #ifdef CONFIG_MMU

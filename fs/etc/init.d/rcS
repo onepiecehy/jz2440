@@ -1,0 +1,17 @@
+#!/bin/sh
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:
+
+runlevel=S
+prevlevel=N
+umask 022
+export PATH runlevel prevlevel
+
+mount -a
+mkdir /dev/pts
+mount -t devpts devpts /dev/pts
+mdev -s
+
+mkdir -p /var/lock
+
+/bin/hostname -F /etc/hostname
