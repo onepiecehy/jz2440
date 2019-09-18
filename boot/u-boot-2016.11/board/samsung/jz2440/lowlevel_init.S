@@ -103,7 +103,7 @@
 #define REFEN			0x1	/* Refresh enable */
 #define TREFMD			0x0	/* CBR(CAS before RAS)/Auto refresh */
 #define Trp			0x0	/* 2clk */
-#define Trc			0x0	/* 4clk */
+#define Trc			0x3	/* 4clk */
 #define Tchr			0x2	/* 3clk */
 #define REFCNT			1269	/* period=7.8us, HCLK=100Mhz, (2048+1-7.8*100) */
 /**************************************/

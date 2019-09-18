@@ -31,8 +31,8 @@
 #include <image.h>
 
 #ifndef CONFIG_SYS_BOOTM_LEN
-/* use 8MByte as default max gunzip size */
-#define CONFIG_SYS_BOOTM_LEN	0x800000
+/* use 16MByte as default max gunzip size */
+#define CONFIG_SYS_BOOTM_LEN	0x1600000
 #endif
 
 #define IH_INITRD_ARCH IH_ARCH_DEFAULT

@@ -23,8 +23,8 @@ DECLARE_GLOBAL_DATA_PTR;
 #define M_PDIV	0x4
 #define M_SDIV	0x1
 #elif (FCLK_SPEED == 1)		/* Fout = 202.8MHz */
-#define M_MDIV	0x5c
-#define M_PDIV	0x1
+#define M_MDIV	0x7f
+#define M_PDIV	0x2
 #define M_SDIV	0x1
 #endif
 
