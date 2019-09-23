@@ -177,6 +177,7 @@ static struct platform_device *jz2440_devices[] __initdata = {
 	&s3c_device_wdt,
 	&s3c_device_i2c0,
 	&s3c_device_iis,
+	&s3c_device_rtc,
 	&Jz2440_device_eth,
 };
 

@@ -15,6 +15,7 @@ function build_kernel()
 	# build kernel
 	echo "-------------------build kernel ------------------------------------- start\n"
 	make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE uImage
+#	make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE dtbs
 	cp arch/arm/boot/uImage ${home}/release
 	cp arch/arm/boot/zImage ${home}/release
 	echo "-------------------build kernel ------------------------------------- stop\n"

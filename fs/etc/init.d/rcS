@@ -15,3 +15,6 @@ mdev -s
 mkdir -p /var/lock
 
 /bin/hostname -F /etc/hostname
+
+hwclock -s
+

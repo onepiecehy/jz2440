@@ -675,6 +675,20 @@ kernel/linux-4.20.9/arch/arm/mach-s3c24xx/mach-smdk2440.c -->  kernel/linux-4.20
 
 调试记录：
 
-1.报错：exitcode=0x00000004，使用readelf -A vmlinux查看CPU架构是V4T,而查看init显示是V5TE，从别处拷贝V4T版本的init替代之后就好了。
+1.报错：exitcode=0x00000004，使用readelf -A vmlinux查看CPU架构是V4T,而查看busybox显示是V5TE。               
 
-------
+解决方法：
+
+<1>make menuconfig 中指定架构 (-mcpu=arm920t) Additional CFLAGS  
+
+<2>任然同样的错，确定架构没有问题了，通过上网查找，发现有人是拷贝的armv4t中的库，故重新拷贝库文件，顺利启动。
+
+
+
+四、移植RTC
+
+1.当前版本的内核，rtc-s3c.c只支持设备树，所以直接编译是匹配不到RTC设备的。
+
+2.将老版本的linux内核中的rtc-s3c.c拷贝过来，替换掉即可。
+
+
